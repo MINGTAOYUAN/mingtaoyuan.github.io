@@ -1,13 +1,9 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-title: "Hi, I'm John Doe!"
+layout: home
 author_profile: true
-related: false
-header:
-  overlay_image: "/assets/coding.jpg"
-  caption: "Photo by **Michael Pointner**"
 ---
 
+Hi, I'm Mingtao Yuan.
 
-Hey! I'm programmer John Doe, welcome to my portfolio!
+I'm a high school student interested in engineering, motorsports, and visual storytelling.
+Through photography, I explore speed, structure, and the relationship between humans and machines.
