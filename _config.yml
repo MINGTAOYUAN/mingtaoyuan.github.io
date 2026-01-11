@@ -104,10 +104,10 @@ analytics:
 
 # Site Author
 author:
-  name             : "John Doe"
+  name             : "Mingtao Yuan"
   avatar           : "/assets/portrait.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am a professional programmer."
-  location         : "Canada"
+  bio              : "A Fryeburg Academy Student."
+  location         : "United States"
   email            : 
   links:
     - label: "Email"
