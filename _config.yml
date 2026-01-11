@@ -105,8 +105,8 @@ analytics:
 # Site Author
 author:
   name             : "Mingtao Yuan"
-  avatar           : "/assets/portrait.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "A Fryeburg Academy Student."
+  avatar           : "/assets/mingtao.jpeg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "A Fryeburg Academy Student"
   location         : "United States"
   email            : 
   links:
