@@ -1,1 +1,211 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A measured comparison of two Buttonwillow laps by Mingtao Yuan."><title>Finding 7.401 Seconds — Mingtao Yuan</title><link rel="stylesheet" href="assets/race/site.css"></head><body><header class="nav"><a class="brand" href="index.html">MY<span> / 23</span></a><nav><a href="motorsport.html">Motorsport</a><a class="active" href="racecraft.html">Data project</a><a href="rwth.html">RWTH Aachen</a><a href="photography.html">Photography</a><a href="index.html#about">About</a></nav></header><main><section class="page-head wrap"><p class="eyebrow">02 / DATA-DRIVEN RACECRAFT</p><h1>Finding <em>7.401<br>seconds.</em></h1><p>What changed between a morning lap and an afternoon lap at Buttonwillow?</p><div class="stats"><div><span>MORNING</span><strong>2:38.624</strong></div><div><span>AFTERNOON</span><strong>2:31.223</strong></div><div><span>DIFFERENCE</span><strong>−7.401 s</strong></div></div></section><section class="data-section wrap"><div class="section-label"><p class="eyebrow">01 / THE QUESTION</p><h2>What can the trace actually tell me?</h2></div><div><p>I selected a complete lap from the 9:14 AM session and another from the 2:12 PM session on April 20, 2026. The AiM beacon markers give the lap times above. I compared GPS speed and elapsed time against normalized lap distance to see where the gap opened.</p><p class="note">These laps come from separate sessions. The comparison documents a change, but by itself does not prove which driver input caused it.</p></div></section><section class="chart-block wrap"><div class="chart-title"><div><p class="eyebrow">02 / SPEED TRACE</p><h2>Speed across the lap</h2></div><div class="legend"><span class="line morning"></span> Morning <span class="line afternoon"></span> Afternoon</div></div><div class="chart" id="speed-chart" role="img" aria-label="GPS speed plotted across normalized lap distance for two selected laps"></div><p class="chart-caption">GPS speed in km/h. The horizontal axis is percent of measured lap distance; curves are aligned by distance, not clock time.</p></section><section class="chart-block wrap"><div class="chart-title"><div><p class="eyebrow">03 / ELAPSED TIME</p><h2>How the gap develops</h2></div></div><div class="chart" id="delta-chart" role="img" aria-label="Afternoon elapsed time minus morning elapsed time across normalized lap distance"></div><p class="chart-caption">Negative values indicate the afternoon lap is ahead. Endpoints reflect sampled GPS times and may differ by a few milliseconds from beacon markers.</p></section><section class="data-section wrap"><div class="section-label"><p class="eyebrow">04 / INTERPRETATION</p><h2>From observation to hypothesis.</h2></div><div><p>The faster lap is not explained by a single top speed. The traces show where speed and accumulated time differ throughout the lap. I would use those regions to review synchronized video, braking points, and corner exits before claiming a cause.</p><p><strong>Next test:</strong> choose one repeatable corner, record the entry speed, minimum speed, and exit speed over several laps, then change one driving input at a time. Compare results under similar track conditions.</p><p class="note">Analysis uses AiM exports at 20 Hz; distance is integrated from GPS speed. No brake pressure or throttle-position channels were supplied, so those inputs cannot be measured directly here.</p></div></section><section class="next wrap"><p class="eyebrow">THE PROCESS CONTINUES</p><h2>Measure. Question. Test again.</h2><a class="button" href="motorsport.html">See the driving story ↗</a></section></main><footer>© 2026 Mingtao Yuan <span><a href="index.html">Back to home ↑</a></span></footer><script src="assets/race/charts.js" defer></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="A measured comparison of two Buttonwillow laps by Mingtao Yuan."><title>Finding 7.401 Seconds — Mingtao Yuan</title><link rel="stylesheet" href="assets/race/site.css"></head><body><header class="nav"><a class="brand" href="index.html">MY<span> / 23</span></a><nav><a href="motorsport.html">Motorsport</a><a class="active" href="racecraft.html">Data project</a><a href="rwth.html">RWTH Aachen</a><a href="photography.html">Photography</a><a href="#full-report">Full report</a><a href="index.html#about">About</a></nav></header><main><section class="page-head wrap"><p class="eyebrow">02 / DATA-DRIVEN RACECRAFT</p><h1>Finding <em>7.401<br>seconds.</em></h1><p>What changed between a morning lap and an afternoon lap at Buttonwillow?</p><div class="stats"><div><span>MORNING</span><strong>2:38.624</strong></div><div><span>AFTERNOON</span><strong>2:31.223</strong></div><div><span>DIFFERENCE</span><strong>−7.401 s</strong></div></div></section><section class="data-section wrap"><div class="section-label"><p class="eyebrow">01 / THE QUESTION</p><h2>What can the trace actually tell me?</h2></div><div><p>I selected a complete lap from the 9:14 AM session and another from the 2:12 PM session on April 20, 2026. The AiM beacon markers give the lap times above. I compared GPS speed and elapsed time against normalized lap distance to see where the gap opened.</p><p class="note">These laps come from separate sessions. The comparison documents a change, but by itself does not prove which driver input caused it.</p></div></section><section class="chart-block wrap"><div class="chart-title"><div><p class="eyebrow">02 / SPEED TRACE</p><h2>Speed across the lap</h2></div><div class="legend"><span class="line morning"></span> Morning <span class="line afternoon"></span> Afternoon</div></div><div class="chart" id="speed-chart" role="img" aria-label="GPS speed plotted across normalized lap distance for two selected laps"></div><p class="chart-caption">GPS speed in km/h. The horizontal axis is percent of measured lap distance; curves are aligned by distance, not clock time.</p></section><section class="chart-block wrap"><div class="chart-title"><div><p class="eyebrow">03 / ELAPSED TIME</p><h2>How the gap develops</h2></div></div><div class="chart" id="delta-chart" role="img" aria-label="Afternoon elapsed time minus morning elapsed time across normalized lap distance"></div><p class="chart-caption">Negative values indicate the afternoon lap is ahead. Endpoints reflect sampled GPS times and may differ by a few milliseconds from beacon markers.</p></section><section class="data-section wrap"><div class="section-label"><p class="eyebrow">04 / INTERPRETATION</p><h2>From observation to hypothesis.</h2></div><div><p>The faster lap is not explained by a single top speed. The traces show where speed and accumulated time differ throughout the lap. I would use those regions to review synchronized video, braking points, and corner exits before claiming a cause.</p><p><strong>Next test:</strong> choose one repeatable corner, record the entry speed, minimum speed, and exit speed over several laps, then change one driving input at a time. Compare results under similar track conditions.</p><p class="note">Analysis uses AiM exports at 20 Hz; distance is integrated from GPS speed. No brake pressure or throttle-position channels were supplied, so those inputs cannot be measured directly here.</p></div></section><section class="report-intro wrap" id="full-report"><p class="eyebrow">FULL STUDY / THREE SELECTED LAPS</p><h2>Data-Driven Racecraft</h2><p class="report-subtitle">How I Used Telemetry to Turn My First Track Experience into an Engineering Experiment</p><p>Mingtao Yuan · Buttonwillow Raceway Park · Mazda Miata NA 1.6 · April 20, 2026</p><p class="report-context">The interactive charts above compare the morning and afternoon laps. The complete report below also discusses an intermediate late-morning lap and other telemetry channels. Braking and throttle interpretations are hypotheses where direct pedal sensors were unavailable.</p></section><article class="report-body wrap" aria-label="Complete Data-Driven Racecraft report"><h2>The Question</h2>
+<p>When I first began driving on a real racetrack, I was interested in a question that went beyond simply becoming faster:</p>
+<p>Could I use vehicle telemetry to understand why I was improving—and then use that understanding to make my driving better?</p>
+<p>I had spent time practicing in racing simulators, but real driving immediately felt different. The physical forces, braking confidence, tire grip, and consequences of every decision were no longer simulated.</p>
+<p>Instead of relying only on how a lap felt, I wanted to measure what was actually happening.</p>
+<p>That turned my track day into an engineering experiment.</p>
+<h2>1. OBSERVE — From Simulation to Reality</h2>
+<p>My first observation was simple: two laps that felt similar could produce very different lap times.</p>
+<p>During my sessions at Buttonwillow Raceway Park, I noticed that I was becoming more comfortable with the car. I could brake with more confidence, carry more speed into some corners, and better anticipate how the car would respond.</p>
+<p>But those were subjective impressions.</p>
+<p>I wanted objective evidence.</p>
+<p>So I began thinking about driving as a dynamic system rather than simply a sport.</p>
+<p>The car generates measurable outputs—speed, acceleration, RPM, position, lateral force—and my decisions as a driver influence those outputs.</p>
+<p>That led to my research question:</p>
+<p>How can vehicle telemetry be used to identify, quantify, and verify improvements in driving performance?</p>
+<h2>2. MEASURE — Building the Dataset</h2>
+<p>I recorded my driving using an AiM telemetry system.</p>
+<p>For this analysis, I selected three representative laps from three sessions on the same day:</p>
+<p>Lap                 Session              Lap Time</p>
+<p>A                   Morning              2:38.624</p>
+<p>B                 Late Morning            2:33.224</p>
+<p>C                  Afternoon              2:31.223</p>
+<p>The telemetry included:</p>
+<p>GPS speed and position, longitudinal acceleration, lateral acceleration, RPM, calculated gear, and distance around the circuit.</p>
+<p>Instead of comparing the laps only by total lap time, I aligned the telemetry by distance traveled around the track.</p>
+<p>This allowed me to ask a much more useful question:</p>
+<p>At exactly which parts of the track was I gaining or losing time?</p>
+<h2>3. ANALYZE — Finding the 7.401 Seconds</h2>
+<p>Between Lap A and Lap C, my lap time improved by:</p>
+<p>7.401 seconds</p>
+<p>or approximately:</p>
+<p>4.67%</p>
+<p>Initially, I assumed that becoming faster might mean reaching a much higher maximum speed.</p>
+<p>The telemetry showed something different.</p>
+<p>My maximum GPS speed changed only from:</p>
+<p>140.2 km/h → 142.3 km/h</p>
+<p>But my average speed increased from:</p>
+<p>105.4 km/h → 110.5 km/h</p>
+<p>Even more interesting was minimum speed:</p>
+<p>50.6 km/h → 61.3 km/h</p>
+<p>This was one of the most important discoveries in the project.</p>
+<p>The improvement was not primarily about driving faster on the straights.</p>
+<p>It was about losing less speed in the corners.</p>
+<h2>4. SPEED — Momentum Matters More Than Top Speed</h2>
+<p>When I overlaid speed against distance, I could see that the fastest lap did not simply have a higher peak.</p>
+<p>Instead, its speed trace remained higher through several important low-speed sections.</p>
+<p>That changed how I thought about lap time.</p>
+<p>A car may spend only a short period near maximum speed, but every unnecessary reduction in corner speed affects not only the corner itself but also the acceleration zone that follows it.</p>
+<p>I began to think less about “going faster” and more about preserving momentum.</p>
+<p>That is a fundamentally different problem.</p>
+<h2>5. DELTA TIME — Locating Performance Loss</h2>
+<p>I then calculated cumulative time difference relative to my fastest lap.</p>
+<p>This produced a delta-time trace.</p>
+<p>Instead of saying:</p>
+<p>“Lap C was 7.401 seconds faster.”</p>
+<p>I could now ask:</p>
+<p>“Where did those 7.401 seconds appear?”</p>
+<p>The largest gains were concentrated in specific areas.</p>
+<p>When I divided the approximately 4.64 km lap into ten equal-distance sectors, the first three sectors accounted for approximately:</p>
+<p>4.86 seconds of improvement.</p>
+<p>The final three sectors contributed approximately another:</p>
+<p>2.27 seconds.</p>
+<p>The middle of the lap changed relatively little.</p>
+<p>In two sectors, my fastest overall lap was actually slightly slower.</p>
+<p>That was important because it showed me that a personal-best lap is not necessarily an optimal lap.</p>
+<p>There were still measurable weaknesses inside my fastest result.</p>
+<h2>6. BRAKING — Confidence Can Be Measured</h2>
+<p>I did not have a brake-pressure sensor, so I could not directly measure pedal force.</p>
+<p>Instead, I used negative GPS longitudinal acceleration as a braking proxy.</p>
+<p>My peak measured deceleration changed from approximately:</p>
+<p>−0.59 g → −0.83 g</p>
+<p>The telemetry also showed that I entered several braking zones at higher speeds later in the day.</p>
+<p>For example, near one late-lap braking zone, my speed at the deceleration event increased from approximately:</p>
+<p>108 km/h → 128 km/h</p>
+<p>This suggested that I was becoming more confident about carrying speed toward the braking zone and managing the transition into the corner.</p>
+<p>But I also learned an important lesson about engineering analysis:</p>
+<p>Do not claim more than the sensor actually measured.</p>
+<p>Without brake-pressure data, I cannot prove exactly how hard I pressed the pedal or precisely how I released the brake.</p>
+<p>Telemetry is powerful only when its limitations are respected.</p>
+<h2>7. CORNER SPEED — My Biggest Discovery</h2>
+<p>One of the clearest improvements occurred around a major slow-speed section approximately 0.61 km into the lap.</p>
+<p>My minimum speed increased from approximately:</p>
+<p>50.9 km/h → 61.3 km/h</p>
+<p>Across the surrounding analysis window, this represented approximately:</p>
+<p>1.40 seconds of improvement.</p>
+<p>Similar gains appeared around other major speed minima.</p>
+<p>This helped me understand something that simulator practice alone had not fully taught me:</p>
+<p>The fastest corner is not necessarily the corner with the latest braking point.</p>
+<p>The entire sequence matters:</p>
+<p>Entry → rotation → minimum speed → exit → acceleration</p>
+<p>Optimizing only one part can damage another.</p>
+<h2>8. VEHICLE DYNAMICS — Learning to Use the Grip Envelope</h2>
+<p>Another measurable change appeared in lateral acceleration.</p>
+<p>Peak absolute lateral acceleration increased from approximately:</p>
+<p>1.09 g → 1.21 g</p>
+<p>This did not mean that every corner should be driven at maximum lateral acceleration.</p>
+<p>Instead, it suggested that as I gained experience, I became more comfortable operating closer to the available tire-road grip envelope in selected parts of the track.</p>
+<p>At the same time, my stronger longitudinal deceleration showed that I was also becoming more comfortable using the car dynamically during braking.</p>
+<p>This introduced me to a concept I want to study more deeply:</p>
+<p>The tire has a finite amount of available grip, and braking, cornering, and acceleration compete for that capability.</p>
+<p>Driving began to look less like a sequence of instincts and more like an applied vehicle-dynamics problem.</p>
+<h2>9. RPM AND GEAR — Same Car, Different Result</h2>
+<p>The car itself did not suddenly become more powerful during the day.</p>
+<p>My maximum RPM remained in approximately the same range, around 6,100–6,200 rpm.</p>
+<p>The telemetry indicated that I drove almost the entire lap in third and fourth gear.</p>
+<p>On my fastest lap, approximately:</p>
+<p>45% was spent in 3rd gear</p>
+<p>55% was spent in 4th gear</p>
+<p>This strengthened my interpretation of the data.</p>
+<p>The 7.401-second improvement was not the result of a major change in engine performance.</p>
+<p>It came from using the same vehicle more effectively.</p>
+<h2>10. HYPOTHESIZE — Turning Data into a Theory</h2>
+<p>After comparing the three laps, I developed a hypothesis:</p>
+<p>Most of my improvement came from preserving momentum through selected low-speed sections and improving the transitions between braking, cornering, and acceleration—not from increasing straight-line speed.</p>
+<p>The evidence supported this:</p>
+<p>Maximum speed increased only about 1.5%.</p>
+<p>Lap time improved about 4.7%.</p>
+<p>Minimum speed increased about 21%.</p>
+<p>Peak lateral acceleration increased about 12%.</p>
+<p>The variables that changed most strongly were associated with cornering and vehicle dynamics rather than engine performance.</p>
+<h2>11. MODIFY — Changing the Driver</h2>
+<p>The next step was not to modify the car.</p>
+<p>It was to modify myself.</p>
+<p>I focused on approaching selected corners with greater confidence, avoiding unnecessary speed reduction, making smoother transitions, and preserving momentum through the corner sequence.</p>
+<p>This changed my relationship with the telemetry.</p>
+<p>The data was no longer something I examined after driving.</p>
+<p>It became part of a feedback loop:</p>
+<p>Drive → Measure → Analyze → Change → Drive Again</p>
+<h2>12. TEST — Did the Hypothesis Work?</h2>
+<p>My selected lap times progressed from:</p>
+<p>2:38.624</p>
+<p>to</p>
+<p>2:33.224</p>
+<p>to</p>
+<p>2:31.223</p>
+<p>But a single fast lap would not be enough to convince me.</p>
+<p>I wanted evidence of repeatability.</p>
+<p>During the afternoon session, I recorded a sequence of laps of approximately:</p>
+<p>2:32.953</p>
+<p>2:32.518</p>
+<p>2:31.277</p>
+<p>2:31.223</p>
+<p>The improvement was no longer an isolated event.</p>
+<p>It had become repeatable.</p>
+<h2>13. VERIFY — What the Data Actually Supports</h2>
+<p>The experiment supported my original hypothesis.</p>
+<p>My lap time improved by 7.401 seconds, while maximum speed changed very little.</p>
+<p>The largest improvements occurred in specific cornering sections.</p>
+<p>Minimum speed increased substantially.</p>
+<p>Lateral acceleration increased.</p>
+<p>Braking-zone behavior changed.</p>
+<p>And several consecutive afternoon laps approached the same performance level.</p>
+<p>Together, these measurements support the conclusion that my improvement came primarily from driver-controlled vehicle dynamics and momentum management, rather than simply higher straight-line speed.</p>
+<h2>14. WHAT DID NOT IMPROVE?</h2>
+<p>One of the most useful discoveries was that my fastest lap was not faster everywhere.</p>
+<p>Two middle sectors were slightly slower than my earlier lap.</p>
+<p>That means the next question is not:</p>
+<p>“How can I repeat my fastest lap?”</p>
+<p>It is:</p>
+<p>“Can I combine the best parts of different laps into a theoretically faster lap?”</p>
+<p>This is where the project becomes more interesting to me.</p>
+<p>A lap is a system of interconnected optimization problems.</p>
+<p>Improving one variable can sometimes make another worse.</p>
+<h2>15. NEXT EXPERIMENT</h2>
+<p>My next experiment would improve both the driving and the measurement system.</p>
+<p>First, I would focus on the middle sectors where my fastest lap still lost time.</p>
+<p>I would compare:</p>
+<p>GPS speed + lateral acceleration + longitudinal acceleration + yaw/gyro behavior + onboard video</p>
+<p>to determine whether the remaining loss comes from line choice, excess braking, steering input, or corner-exit positioning.</p>
+<p>Second, I would add additional sensors if technically possible:</p>
+<p>Throttle position and brake pressure.</p>
+<p>Those channels would allow me to directly measure:</p>
+<p>brake onset, brake release, coast time, throttle pickup, and the transition between longitudinal and lateral tire loading.</p>
+<p>Finally, instead of targeting one personal-best lap, I would define a new engineering objective:</p>
+<p>Produce five consecutive laps within a narrow performance window.</p>
+<p>Repeatability is more meaningful than a single peak result.</p>
+<h2>What This Project Changed for Me</h2>
+<p>I originally approached motorsport because I enjoyed cars and racing.</p>
+<p>Telemetry changed the way I saw it.</p>
+<p>Behind every lap is a combination of mechanics, physics, sensors, data processing, human decision-making, and optimization.</p>
+<p>A corner can be described through velocity, acceleration, yaw, tire loading, and time.</p>
+<p>A driver’s impression can become a hypothesis.</p>
+<p>And a hypothesis can be tested.</p>
+<p>The most valuable result of this project was not the 7.401 seconds I gained.</p>
+<p>It was learning how to ask:</p>
+<p>Why?</p>
+<p>That question transformed a track day into an engineering experiment.</p>
+<h2>My Engineering Process</h2>
+<h3>OBSERVE</h3>
+<p>I noticed that my driving was improving, but I did not know exactly why.</p>
+<p>↓</p>
+<h3>MEASURE</h3>
+<p>I recorded GPS speed, acceleration, RPM, gear, position, distance, and lap time.</p>
+<p>↓</p>
+<h3>ANALYZE</h3>
+<p>I aligned laps by distance and compared speed traces, delta time, corner minima, acceleration, RPM, gear selection, and sector performance.</p>
+<p>↓</p>
+<h3>HYPOTHESIZE</h3>
+<p>I concluded that the largest opportunity was momentum preservation through selected corners rather than higher straight-line speed.</p>
+<p>↓</p>
+<h3>MODIFY</h3>
+<p>I changed my approach to braking, corner entry, transitions, and momentum management.</p>
+<p>↓</p>
+<h3>TEST</h3>
+<p>I drove additional sessions and collected new telemetry.</p>
+<p>↓</p>
+<h3>VERIFY</h3>
+<p>Lap time improved from 2:38.624 to 2:31.223, and multiple afternoon laps demonstrated that the improvement was repeatable.</p>
+<p>Data → Question → Experiment → Understanding</p>
+<p>I did not use data simply to prove that I was faster.</p>
+<p>I used data to understand why I was faster—and to decide what I should test next.</p></article><section class="next wrap"><p class="eyebrow">THE PROCESS CONTINUES</p><h2>Measure. Question. Test again.</h2><a class="button" href="motorsport.html">See the driving story ↗</a></section></main><footer>© 2026 Mingtao Yuan <span><a href="index.html">Back to home ↑</a></span></footer><script src="assets/race/charts.js" defer></script></body></html>
