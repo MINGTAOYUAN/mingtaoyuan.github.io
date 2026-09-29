@@ -13,3 +13,14 @@
 .corner-analysis .corner-takeaway{color:var(--ink);font:600 clamp(1.3rem,2.4vw,1.9rem)/1.28 'Space Grotesk',sans-serif;letter-spacing:-.035em;margin:0 0 24px;max-width:730px}.corner-takeaway span{display:block;color:var(--accent);font:700 .74rem/1.5 'DM Sans',sans-serif;letter-spacing:.16em;margin-bottom:7px}
 
 .chart-reading-guide{background:#1b2929;border-left:3px solid var(--accent);padding:24px 28px;margin:-28px 0 48px}.chart-reading-guide h3{color:var(--ink);font:600 1.5rem 'Space Grotesk',sans-serif;letter-spacing:-.03em;margin:0 0 13px}.chart-reading-guide p,.chart-reading-guide li{color:#cbd1ce;font-size:1rem;line-height:1.6}.chart-reading-guide p{margin:0 0 12px}.chart-reading-guide ul{margin:10px 0 15px;padding-left:22px}.chart-reading-guide li{margin:5px 0}.chart-reading-guide strong{color:var(--ink)}@media(max-width:750px){.chart-reading-guide{margin:-20px 0 42px;padding:20px}}
+
+
+/* RWTH summer-school photo gallery */
+.rwth-gallery-section{padding-top:88px;padding-bottom:35px;border-bottom:1px solid var(--rule)}
+.rwth-gallery-section h2{font-size:clamp(2.4rem,5vw,4.5rem);margin:14px 0}
+.rwth-gallery-intro{max-width:650px;color:var(--muted)}
+.rwth-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:38px}
+.rwth-gallery figure{margin:0;background:var(--panel);padding:12px}
+.rwth-gallery img{width:100%;height:350px;object-fit:contain;background:#101414}
+.rwth-gallery figcaption{padding:12px 4px 2px;color:var(--muted);font-size:.88rem}
+@media(max-width:750px){.rwth-gallery-section{padding-top:65px}.rwth-gallery{grid-template-columns:1fr;gap:16px}.rwth-gallery img{height:300px}}
