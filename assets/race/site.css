@@ -33,3 +33,6 @@
 .hero-content{align-self:flex-end;margin-bottom:clamp(82px,11vh,135px);width:min(560px,45vw)}
 .hero h1{font-size:clamp(3.8rem,7vw,7rem)}
 @media(max-width:750px){.hero-content{width:auto;margin-bottom:80px}.hero h1{font-size:clamp(3.6rem,16vw,6.5rem)}}
+
+/* Shift the home photograph to the right to open space beside the title. */
+@media(min-width:751px){.hero>img{width:114%;max-width:none;object-position:left 45%}}
