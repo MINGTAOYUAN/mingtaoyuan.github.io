@@ -33,4 +33,20 @@ def analyze(payload):
     return {'laps':result,'notes':['Delta uses normalized GPS distance, not surveyed corner boundaries. Different racing lines introduce alignment uncertainty.','GPS longitudinal deceleration is not brake pressure. Throttle is unavailable. Calculated gear is logger-derived.','First and last session segments are excluded by default; verify lap selections and track layout before comparison.']}
 
 def summary(result):
-    return {'laps':[{k:v for k,v in x.items() if k not in ('trace','delta')} for x in result['laps']], 'notes':result['notes']}
+    laps=[]
+    for lap in result['laps']:
+        item={k:v for k,v in lap.items() if k not in ('trace','delta','sectors')}
+        item['sectors']=[]
+        for i,sector in enumerate(lap['sectors']):
+            window=lap['trace'][i*20:(i+1)*20+1]
+            item['sectors'].append({**sector,
+                'normalized_distance_pct':[i*10,(i+1)*10],
+                'time_s':round(window[-1][0]-window[0][0],4),
+                'entry_speed_kmh':round(window[0][2],1),
+                'minimum_speed_kmh':round(min(r[2] for r in window),1),
+                'exit_speed_kmh':round(window[-1][2],1),
+                'peak_deceleration_g':round(min(r[5] for r in window),3),
+                'peak_acceleration_g':round(max(r[5] for r in window),3)})
+        laps.append(item)
+    return {'laps':laps,'notes':result['notes']+[
+        'Sector entry and exit refer to equal-distance bin boundaries, not corner entry or exit. Speed minima and acceleration peaks use the 201-point resampled trace, so brief events may be missed.']}
