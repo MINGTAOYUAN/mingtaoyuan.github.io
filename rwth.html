@@ -25,6 +25,18 @@ gtag('config', 'G-NGPHEPJW9R', {allow_google_signals: false, allow_ad_personaliz
   <title>RWTH Aachen — Mingtao Yuan</title>
   <link rel="stylesheet" href="assets/race/site.css">
   <link rel="stylesheet" href="assets/rwth/course.css">
+  <style>
+    .inertia-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:24px}
+    .inertia-card{margin:0;padding:24px;border:1px solid var(--rule);background:var(--panel);min-width:0}
+    .inertia-card h3{margin-top:0;font-size:1.2rem}.inertia-card p,.inertia-card figcaption{font-size:.95rem;line-height:1.7}
+    .inertia-card svg{display:block;width:100%;height:auto;background:#fff;border-radius:4px}
+    .inertia-card figcaption{margin-top:18px;color:var(--muted)}.inertia-equation{font-size:1.3rem!important;color:var(--accent)}
+    .inertia-results{display:grid;grid-template-columns:1fr 1fr;gap:18px}.inertia-results dt{font-weight:700}.inertia-results dd{margin:8px 0;font-size:.85rem;line-height:1.7}.inertia-results strong{font-size:1.35rem;color:var(--accent)}
+    .inertia-bar{display:flex;height:22px;background:rgba(128,128,128,.12);margin:8px 0 18px}.inertia-bar span{background:#8b8882}.inertia-bar b{background:#a34e30}.inertia-bar-label{font-size:.85rem}
+    .inertia-note{font-size:.8rem!important;line-height:1.6;color:var(--muted);margin-top:22px}
+    @media(max-width:760px){.inertia-grid{grid-template-columns:1fr}.inertia-card{padding:18px}}
+    @media(max-width:400px){.inertia-results{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
   <header class="nav">
@@ -50,9 +62,65 @@ gtag('config', 'G-NGPHEPJW9R', {allow_google_signals: false, allow_ad_personaliz
       </div>
       <div>
         <p>In summer 2026, I completed RWTH Aachen's three-week summer school, &ldquo;Innovative Technologies in Automotive Engineering.&rdquo; I explored vehicle dynamics and propulsion systems, automated driving, and lithium-ion battery technology—from battery ageing and safety to pack design, thermal management, and sustainability.</p>
+        <p>I chose to study in Germany because I wanted to learn in a country with a long automotive engineering tradition. My goal was to understand advanced vehicle technologies, see how engineering precision and creativity work together, and get a feel for the wider society and culture that support its automotive industry. I also hoped to meet students from different countries who shared my curiosity about cars and engineering.</p>
         <p>The course was difficult and pushed me beyond what I already knew. Many of these topics will take much more study and practice for me to fully understand, but I am grateful for the chance to broaden my perspective and explore a field I care about. I was also happy to make new friends from around the world who shared my interests. The experience gave me more questions to pursue and more motivation to keep learning.</p>
         <a class="textlink" href="racecraft.html">See the data project ↗</a>
       </div>
+    </section>
+    <section class="rwth-course-section wrap inertia-study" aria-labelledby="inertia-title">
+      <p class="eyebrow">ONE CONCEPT I CAN EXPLAIN</p>
+      <h2 id="inertia-title">Why rotating parts matter when a car accelerates.</h2>
+      <p class="rwth-course-intro">Working through the reduced moment of inertia exercise helped me understand that accelerating a car means both moving its mass forward and spinning its wheels and drivetrain faster.</p>
+      <div class="inertia-grid">
+        <figure class="inertia-card">
+          <svg viewBox="0 0 620 260" role="img" aria-labelledby="inertia-diagram-title inertia-diagram-desc">
+            <title id="inertia-diagram-title">Rotational inertia referred to the wheels</title>
+            <desc id="inertia-diagram-desc">Engine and clutch rotation passes through the gearbox and final drive to the wheels. Referring a component's inertia to the wheel axis multiplies it by the square of its speed ratio to the wheels.</desc>
+            <defs><marker id="inertia-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#a34e30"/></marker></defs>
+            <rect x="15" y="65" width="170" height="80" rx="8" fill="#f1ede5" stroke="#665e54"/>
+            <rect x="232" y="65" width="155" height="80" rx="8" fill="#f1ede5" stroke="#665e54"/>
+            <circle cx="513" cy="105" r="44" fill="#f1ede5" stroke="#665e54" stroke-width="3"/>
+            <circle cx="513" cy="105" r="12" fill="none" stroke="#665e54"/>
+            <g font-family="Arial, sans-serif" fill="#302b26" text-anchor="middle">
+              <text x="100" y="96" font-size="18">Engine + clutch</text><text x="100" y="122" font-size="15">Rotating components</text>
+              <text x="310" y="96" font-size="18">Gearbox</text><text x="310" y="122" font-size="15">+ final drive</text>
+              <text x="513" y="173" font-size="18">Wheels</text>
+              <text x="310" y="220" font-size="18">Component contribution at the wheels: Θ × (ω / ωw)²</text>
+              <text x="310" y="247" font-size="14">Schematic · illustrates the principle, not a specific vehicle layout</text>
+            </g>
+            <path d="M185 105 H225 M387 105 H459" fill="none" stroke="#a34e30" stroke-width="3" marker-end="url(#inertia-arrow)"/>
+          </svg>
+          <figcaption>My summary of the principle: gearing changes how strongly upstream rotating components contribute to the inertia seen at the wheels.</figcaption>
+        </figure>
+        <div class="inertia-card">
+          <h3>The classroom example</h3>
+          <p>Clutch engaged · vehicle mass <strong>1,495 kg</strong> · dynamic wheel radius <strong>0.301 m</strong> · mass factors <strong>e₁ = 1.22</strong> and <strong>e₅ = 1.031</strong>.</p>
+          <p class="inertia-equation">Θ<sub>red</sub> = (e − 1) × m × r<sup>2</sup></p>
+          <p>The mass factor e includes the extra acceleration resistance from rotating parts; Θ<sub>red</sub> is their combined inertia referred to the wheel axis.</p>
+          <dl class="inertia-results">
+            <div><dt>First gear</dt><dd>(1.22 − 1) × 1,495 × 0.301²<br><strong>29.80 kg·m²</strong></dd></div>
+            <div><dt>Fifth gear</dt><dd>(1.031 − 1) × 1,495 × 0.301²<br><strong>4.20 kg·m²</strong></dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="inertia-grid">
+        <div class="inertia-card">
+          <h3>What the numbers mean</h3>
+          <p>Using m<sub>rot,eq</sub> = Θ<sub>red</sub> / r² = (e − 1)m, the rotating parts add an equivalent acceleration mass of <strong>328.9 kg in first gear</strong> and <strong>46.3 kg in fifth gear</strong>. This is a modelling quantity, not extra physical weight.</p>
+          <div class="inertia-bar-label">First gear · effective mass 1,823.9 kg</div>
+          <div class="inertia-bar" role="img" aria-label="First gear: physical mass 1495 kilograms plus rotational equivalent mass 328.9 kilograms"><span style="width:81.967%"></span><b style="width:18.033%"></b></div>
+          <div class="inertia-bar-label">Fifth gear · effective mass 1,541.3 kg</div>
+          <div class="inertia-bar" role="img" aria-label="Fifth gear: physical mass 1495 kilograms plus rotational equivalent mass 46.3 kilograms, on the same scale as first gear"><span style="width:81.967%"></span><b style="width:2.541%"></b></div>
+          <p class="inertia-note">Grey: vehicle mass · orange: rotational equivalent mass. Both bars use the same scale.</p>
+        </div>
+        <div class="inertia-card">
+          <h3>How I would apply this</h3>
+          <p>I can now include rotational inertia in a simple acceleration model: <strong>a = F<sub>net</sub> / (e × m)</strong>, for this example without additional payload. F<sub>net</sub> is the wheel driving force after road resistances are subtracted.</p>
+          <p>This gives me a more precise way to think about lightweight wheels, flywheels, and gear selection in motorsport. A lower gear increases wheel torque, but also increases the reflected inertia of upstream components. The inertia calculation alone cannot tell me which gear produces faster acceleration; I need the available wheel force as well.</p>
+          <p>For a future data study, I would compare an acceleration model with and without rotational inertia against measured speed data, while accounting for engine torque, gearing, and road resistance.</p>
+        </div>
+      </div>
+      <p class="inertia-note">Adapted and redrawn from RWTH Aachen Summer School 2026, Automotive Engineering, Task 3: “Reduced Moment of Inertia,” slides 13–16. Calculations use the first- and fifth-gear inputs on slide 14. This is a course exercise and my explanation of its application.</p>
     </section>
     <section class="rwth-course-section wrap" aria-labelledby="course-diagrams-title">
       <p class="eyebrow">A CLOSER LOOK AT THE COURSE</p>
