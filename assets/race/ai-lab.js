@@ -1,9 +1,12 @@
 'use strict';
-const $=id=>document.getElementById(id);let laps=[], selected=[],result=null,comparisonVersion=0,askController=null;const endpoint='https://mingtao-ai-backend.vercel.app';
+const $=id=>document.getElementById(id);let laps=[], selected=[],result=null,comparisonVersion=0,askController=null,askTracking=null;const endpoint='https://mingtao-ai-backend.vercel.app';
 function track(name,params={}){try{if(typeof window.gtag==='function')window.gtag('event',name,params);}catch(_){/* Analytics must never interrupt the lab. */}}
+// Each dispatched request has one browser-observed terminal outcome.
+function finishAI(request,outcome){if(!request||request.finished)return;request.finished=true;track('lab_ai_'+outcome);}
+function submittedQuestionType(question){const choices=[...$('question-choice').querySelectorAll('input')];const index=choices.findIndex(input=>input.checked&&input.value&&input.value===question);return index>=0?'preset_'+(index+1):'custom';}
 function csv(line){return (line.match(/("(?:[^"]|"")*"|[^,]+)(,|$)/g)||[]).map(s=>s.replace(/,$/,'').replace(/^"|"$/g,'').replace(/""/g,'"'));}
 function parse(text,name){const rows=text.replace(/^\uFEFF/,'').split(/\r?\n/).map(csv);const h=rows.findIndex(r=>r[0]==='Time'&&r.includes('GPS Speed'));if(h<0)throw Error('Expected an AiM CSV with Time and GPS Speed.');const meta=Object.fromEntries(rows.slice(0,h).filter(r=>r.length).map(r=>[r[0],r.slice(1)]));const channels=['Time','Distance on GPS Speed','GPS Speed','RPM','GPS LatAcc','GPS LonAcc','Calculated Gear'];const ix=channels.map(x=>rows[h].indexOf(x));if(ix.some(i=>i<0))throw Error('Required channels: '+channels.join(', '));if(rows[h+1][ix[2]]!=='km/h'||rows[h+1][ix[1]]!=='m')throw Error('Export speed in km/h and distance in meters.');if(!meta['Beacon Markers']||!meta['Segment Times'])throw Error('Export a full session with beacon markers.');const markers=meta['Beacon Markers'].map(Number);const durations=meta['Segment Times'].map(s=>s.split(':').reduce((a,v)=>a*60+Number(v),0));const data=rows.slice(h+2).filter(r=>r.length===rows[h].length).map(r=>ix.map(i=>Number(r[i])));return durations.slice(1,-1).map((duration,k)=>{const start=markers[k],end=start+duration;let samples=data.filter(r=>r[0]>=start&&r[0]<=end);if(samples.length<20)throw Error('Insufficient samples in lap.');const d=samples[0][1];samples=samples.map(r=>[r[0]-start,r[1]-d,...r.slice(2)]);return {label:name+' · Lap '+(k+2),duration,samples};});}
-function clearAnswer(){if(askController)askController.abort();askController=null;comparisonVersion++;$('answer').replaceChildren();$('next-test').hidden=true;$('next-test-body').replaceChildren();$('ask-button').disabled=false;}
+function clearAnswer(){if(askController){finishAI(askTracking,'cancelled');askController.abort();}askController=null;askTracking=null;comparisonVersion++;$('answer').replaceChildren();$('next-test').hidden=true;$('next-test-body').replaceChildren();$('ask-button').disabled=false;}
 function invalidateComparison(){clearAnswer();selected=[];result=null;$('results').hidden=true;$('comparison-empty').hidden=false;}
 function choose(){invalidateComparison();const host=$('lap-options');host.replaceChildren();laps.forEach((lap,i)=>{const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.checked=i<3;input.value=i;label.append(input,document.createTextNode(' '+lap.label+' — '+fmt(lap.duration)));host.append(label);});$('analyze').disabled=!laps.length;}
 function fmt(s){return Math.floor(s/60)+':'+(s%60).toFixed(3).padStart(6,'0');}
@@ -33,7 +36,7 @@ $('demo').onclick=async()=>{try{invalidateComparison();const response=await fetc
 $('lap-options').addEventListener('change',()=>{invalidateComparison();$('status').textContent='Selection changed. Click Compare Selected Laps to update the evidence.';});
 $('analyze').onclick=async()=>{try{invalidateComparison();selected=[...$('lap-options').querySelectorAll('input:checked')].map(x=>laps[Number(x.value)]);if(!selected.length||selected.length>6)throw Error('Select one to six laps.');render();track('lab_analysis_completed',{lap_count:selected.length});$('status').textContent='Computed locally. Speed and delta comparison ready. Choose a question below and enter your pilot access token.';}catch(e){$('status').textContent=e.message;}};
 $('ask-form').onsubmit=async e=>{
- e.preventDefault();let sent=false,version=comparisonVersion;
+ e.preventDefault();if(askController)return;let request=null,version=comparisonVersion;
  try{
   if(!result||!selected.length)throw Error('Compare selected laps first.');
   if(!$('pilot-token').value.trim())throw Error('Enter your private pilot access token.');
@@ -41,15 +44,15 @@ $('ask-form').onsubmit=async e=>{
   const guidance='Answer this as a focused diagnostic, not a full report. Use only computed evidence, distinguish possible causes from measurements, and do not invent named corners or pedal inputs. Finish with a heading exactly "Next Test" and one controlled experiment to review with an instructor. Question: ';
   const payload=JSON.stringify({laps:selected,question:guidance+question});
   if(new TextEncoder().encode(payload).length>3500000)throw Error('Select fewer laps.');
-  clearAnswer();version=comparisonVersion;const controller=new AbortController();askController=controller;
-  $('ask-button').disabled=true;$('answer').textContent='Reviewing lap evidence…';track('lab_ai_requested',{lap_count:selected.length});sent=true;
+  clearAnswer();version=comparisonVersion;const controller=new AbortController();askController=controller;request={finished:false};askTracking=request;
+  $('ask-button').disabled=true;$('answer').textContent='Reviewing lap evidence…';track('lab_ai_requested',{lap_count:selected.length,question_type:submittedQuestionType(question)});
   const r=await fetch(endpoint+'/api/ask',{signal:AbortSignal.any([controller.signal,AbortSignal.timeout(75000)]),method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+$('pilot-token').value},body:payload});
   const d=await r.json();if(version!==comparisonVersion)return;
   if(!r.ok)throw Error(r.status===403?'Access token was not accepted. Check your private pilot token.':d.detail||'Request failed.');
   if(typeof d.answer!=='string'||!d.answer.trim())throw Error('No answer was returned. Please try again.');
-  renderAnswer(d.answer);track('lab_ai_succeeded');
- }catch(e){if(version!==comparisonVersion)return;if(sent)track('lab_ai_failed');$('answer').textContent=e.message;}
- finally{if(version===comparisonVersion){askController=null;$('ask-button').disabled=false;}}
+  renderAnswer(d.answer);finishAI(request,'succeeded');
+ }catch(e){if(version!==comparisonVersion)return;finishAI(request,'failed');$('answer').textContent=e.message;}
+ finally{if(version===comparisonVersion){askController=null;askTracking=null;$('ask-button').disabled=false;}}
 };
 
 $('question-choice').addEventListener('change',event=>{if(event.target.name==='analysis-question'){track('lab_question_selected',{question_index:[...$('question-choice').querySelectorAll('input')].indexOf(event.target)+1});$('question').value=event.target.value;$('question').focus();}});

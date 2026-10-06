@@ -7,7 +7,16 @@
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-NGPHEPJW9R', {allow_google_signals: false, allow_ad_personalization_signals: false, page_location: location.origin + location.pathname});
+var analyticsReferrer = '';
+try {
+  if (document.referrer) {
+    var referrerUrl = new URL(document.referrer);
+    if (referrerUrl.protocol === 'https:' || referrerUrl.protocol === 'http:') {
+      analyticsReferrer = referrerUrl.origin + referrerUrl.pathname;
+    }
+  }
+} catch (_) { /* Omit invalid referrers. */ }
+gtag('config', 'G-NGPHEPJW9R', {allow_google_signals: false, allow_ad_personalization_signals: false, page_location: location.origin + location.pathname, page_referrer: analyticsReferrer});
 </script>
 
   <meta charset="utf-8">
