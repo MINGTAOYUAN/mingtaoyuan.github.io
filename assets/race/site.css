@@ -6,7 +6,7 @@
 
 .report-figure{margin:34px 0 55px;background:#f8f9f7;color:#202728;padding:16px 16px 12px}.report-figure a{display:block}.report-figure img{width:100%;height:auto;max-width:100%;display:block}.report-figure figcaption{padding:12px 4px 2px;font-size:.91rem;line-height:1.45;color:#343d3c}.report-figure figcaption span{color:#3c6331;margin-left:8px;font-weight:700;white-space:nowrap}@media(max-width:750px){.report-figure{margin:26px -10px 45px;padding:8px}.report-figure figcaption{font-size:.85rem}.report-figure figcaption span{display:block;margin:5px 0 0}}
 
-.corner-animation{margin:34px 0 52px;background:var(--panel);border:1px solid var(--rule);padding:12px}.corner-animation iframe{border:0;width:100%;height:452px;display:block;background:#111b1c}.corner-animation figcaption{padding:12px 5px 3px;color:var(--muted);font-size:.92rem}.corner-animation figcaption a{color:var(--accent);font-weight:700}@media(max-width:750px){.corner-animation{margin:26px -10px 44px;padding:6px}.corner-animation iframe{height:680px}}
+.corner-animation{margin:34px 0 52px;background:var(--panel);border:1px solid var(--rule);padding:12px}.corner-animation iframe{border:0;width:100%;height:452px;display:block;background:#111b1c}.corner-animation figcaption{padding:12px 5px 3px;color:var(--muted);font-size:.92rem}.corner-animation figcaption a{color:var(--accent);font-weight:700}@media(max-width:750px){.corner-animation{margin:26px -10px 44px;padding:6px}.corner-animation iframe{height:555px}}
 
 .corner-analysis{border-left:3px solid var(--accent);background:#1b2929;padding:25px 30px;margin:20px 0 48px}.corner-analysis h3{font:600 clamp(1.5rem,3vw,2.25rem) 'Space Grotesk',sans-serif;letter-spacing:-.04em;line-height:1.15;margin:5px 0 20px;color:var(--ink)}.corner-analysis p{max-width:800px}.corner-analysis .eyebrow{color:var(--accent);font-size:.78rem}@media(max-width:750px){.corner-analysis{padding:20px;margin:15px 0 42px}}
 
@@ -37,4 +37,3 @@
 /* Shift the home photograph to the right to open space beside the title. */
 @media(min-width:751px){.hero{overflow:hidden}.hero>img{width:114%;max-width:none;object-position:left 45%}}
 
-@media(max-width:400px){.corner-animation iframe{height:740px}}
