@@ -37,3 +37,19 @@
 /* Shift the home photograph to the right to open space beside the title. */
 @media(min-width:751px){.hero{overflow:hidden}.hero>img{width:114%;max-width:none;object-position:left 45%}}
 
+
+/* Featured Buttonwillow YouTube videos */
+.featured-track-videos{padding-top:92px;padding-bottom:72px;border-bottom:1px solid var(--rule)}
+.featured-track-videos h2{font-size:clamp(2.4rem,5vw,4.4rem);margin:16px 0 20px}
+.featured-track-intro{max-width:770px;color:#cbd1ce;font-size:1.1rem;margin-bottom:36px}
+.featured-track-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.featured-track-grid figure{margin:0;min-width:0}
+.featured-track-grid figure>a{display:block;position:relative;overflow:hidden;background:var(--panel);aspect-ratio:16/9}
+.featured-track-grid img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
+.featured-track-grid figure>a:hover img{transform:scale(1.035)}
+.featured-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:64px;height:46px;border-radius:13px;background:rgba(10,15,15,.78);color:#fff;font-size:23px;transition:background .2s}
+.featured-track-grid figure>a:hover .featured-play{background:#d92323}
+.featured-track-grid figcaption{padding-top:15px;display:flex;flex-direction:column;gap:3px}
+.featured-track-grid figcaption strong{font:700 1rem 'Space Grotesk',sans-serif;letter-spacing:.03em}
+.featured-track-grid figcaption span{font-size:.89rem;color:var(--muted)}
+@media(max-width:750px){.featured-track-videos{padding-top:65px;padding-bottom:55px}.featured-track-grid{grid-template-columns:1fr;gap:32px}.featured-play{width:58px;height:42px}}
