@@ -10,13 +10,13 @@ html=(root/'engineering-explorer.html').read_text()
 fixture='''<script>
 const realFetch=window.fetch.bind(window);let calls=0;
 window.fetch=async(url,options)=>{
- if(url==='https://mingtao-ai-backend.vercel.app/api/health')return new Response(JSON.stringify({ai_enabled:true,knowledge_version:'2026-10-31.1'}));
+ if(url==='https://mingtao-ai-backend.vercel.app/api/health')return new Response(JSON.stringify({ai_enabled:true,knowledge_version:'2026-10-31.2'}));
  if(url==='https://mingtao-ai-backend.vercel.app/api/knowledge/ask'){
   calls++;const scenario=new URLSearchParams(location.search).get('scenario');
   if(scenario==='quota')return new Response('{}',{status:429});
   if(scenario==='slow')await new Promise(resolve=>setTimeout(resolve,2000));
   const id=scenario==='forged'?'not-in-retrieval':'ms-q2_0';
-  return new Response(JSON.stringify({version:'2026-10-31.1',mode:'generated',generated:{explanation:[{text:'SIMULATED: braking and turning share a simplified force envelope. <img src=x onerror=alert(1)>',evidence_ids:[id]}],reasoning:'SIMULATED inference: combined demand may approach an illustrative limit.',unknowns:'SIMULATED: no measured tire envelope or vehicle data.'}}));
+  return new Response(JSON.stringify({version:'2026-10-31.2',mode:'generated',generated:{explanation:[{text:'SIMULATED: braking and turning share a simplified force envelope. <img src=x onerror=alert(1)>',evidence_ids:[id]}],reasoning:'SIMULATED inference: combined demand may approach an illustrative limit.',unknowns:'SIMULATED: no measured tire envelope or vehicle data.'}}));
  }
  return realFetch(url,options);
 };

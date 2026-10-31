@@ -18,7 +18,7 @@
    const card=document.createElement('article');card.className='knowledge-card';card.id='note-'+entry.id;
    const names={public_reference:'Public reference · original summary',original_method:'Original method note · project-authored',simplified_model:'Simplified model · assumptions apply'};
    paragraph(card,names[entry.basis],'basis');const title=document.createElement('h3');title.textContent=entry.question;card.append(title);
-   paragraph(card,entry.answer);paragraph(card,'Limits: '+entry.limits,'limit');showSources(card,entry);
+   paragraph(card,entry.answer);if(entry.source_section)paragraph(card,'Relevant section: '+entry.source_section,'small');paragraph(card,'Limits: '+entry.limits,'limit');showSources(card,entry);
    paragraph(card,'Matched: '+[...new Set(matched)].join(', ')+' · '+entry.id+' · reviewed '+entry.reviewed_on,'match');host.append(card);
   });
   $('generate-button').disabled=!available||!hits.length;

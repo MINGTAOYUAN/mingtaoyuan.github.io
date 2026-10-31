@@ -58,7 +58,7 @@ class KnowledgeTest(unittest.TestCase):
    self.assertEqual(failed.status_code,502);self.assertNotIn('Forged',failed.text)
  def test_retrieval_and_sources(self):
   self.assertEqual(evidence('冬天为什么会影响电动车续航？')['matches'][0]['entry']['id'],'auto-e2-2')
-  self.assertFalse(any(h['entry']['id']=='auto-e2-1' for h in evidence('LFP chemistry')['matches']))
+  self.assertEqual(evidence('LFP chemistry')['matches'][0]['entry']['source_ids'],['ARGONNE'])
   browser=Path(__file__).resolve().parents[2]/'assets/data/engineering-knowledge.json'
   self.assertEqual(json.loads(browser.read_text()),DATA)
  def test_no_raw_ip_or_forwarded_spoof_in_keys(self):
