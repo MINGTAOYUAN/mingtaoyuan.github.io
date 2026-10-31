@@ -14,6 +14,12 @@ class KnowledgeTest(unittest.TestCase):
  def setUp(self):
   self.env=patch.dict(os.environ,CONFIG,clear=True);self.env.start();self.client=TestClient(app)
  def tearDown(self):self.env.stop()
+ def test_deployment_entrypoint_matches_tested_application(self):
+  from index import app as deployed_app
+  self.assertIs(deployed_app,app)
+  self.assertEqual(TestClient(deployed_app).get('/').json()['health'],'/api/health')
+  self.assertEqual(TestClient(deployed_app).get('/api/health').json()['knowledge_version'],DATA['version'])
+  self.assertEqual(TestClient(deployed_app).get('/api/health').headers['cache-control'],'no-store')
  def test_no_match_never_calls_ai(self):
   with patch('api.index.authorize',new_callable=AsyncMock) as auth:
    r=self.client.post('/api/knowledge/ask',json={'question':'What is the capital of France?'})

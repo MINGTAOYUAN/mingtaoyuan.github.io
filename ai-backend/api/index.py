@@ -11,6 +11,8 @@ async def no_store(request,call_next):
     response=await call_next(request)
     response.headers['Cache-Control']='no-store'
     return response
+@app.get('/')
+def root(): return {'service':'Mingtao AI Lab','health':'/api/health'}
 @app.get('/api/health')
 def health(): return {'status':'ok','ai_enabled':public_enabled(),'knowledge_version':DATA['version']}
 async def body(request,limit=3500000):
