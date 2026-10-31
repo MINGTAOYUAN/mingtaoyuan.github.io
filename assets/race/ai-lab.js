@@ -34,21 +34,20 @@ function renderAnswer(text){
 $('files').addEventListener('change',async e=>{try{invalidateComparison();laps=[];$('lap-options').replaceChildren();$('analyze').disabled=true;for(const file of e.target.files){if(file.size>20000000)throw Error('Each file must be under 20 MB.');laps.push(...parse(await file.text(),file.name));}choose();track('lab_csv_loaded',{file_count:e.target.files.length,lap_count:laps.length});$('status').textContent='Select up to six laps. First and last session segments excluded.';}catch(e){$('status').textContent=e.message;}});
 $('demo').onclick=async()=>{try{invalidateComparison();const response=await fetch('assets/data/ai-demo.json');if(!response.ok)throw Error('Could not load demo.');laps=(await response.json()).laps;choose();track('lab_demo_loaded');$('status').textContent='Real Buttonwillow telemetry · April 20, 2026';}catch(e){$('status').textContent=e.message;}};
 $('lap-options').addEventListener('change',()=>{invalidateComparison();$('status').textContent='Selection changed. Click Compare Selected Laps to update the evidence.';});
-$('analyze').onclick=async()=>{try{invalidateComparison();selected=[...$('lap-options').querySelectorAll('input:checked')].map(x=>laps[Number(x.value)]);if(!selected.length||selected.length>6)throw Error('Select one to six laps.');render();track('lab_analysis_completed',{lap_count:selected.length});$('status').textContent='Computed locally. Speed and delta comparison ready. Choose a question below and enter your pilot access token.';}catch(e){$('status').textContent=e.message;}};
+$('analyze').onclick=async()=>{try{invalidateComparison();selected=[...$('lap-options').querySelectorAll('input:checked')].map(x=>laps[Number(x.value)]);if(!selected.length||selected.length>6)throw Error('Select one to six laps.');render();track('lab_analysis_completed',{lap_count:selected.length});$('status').textContent='Computed locally. Speed and delta comparison ready. Choose a question below. AI explanations are subject to the shared service allowance.';}catch(e){$('status').textContent=e.message;}};
 $('ask-form').onsubmit=async e=>{
  e.preventDefault();if(askController)return;let request=null,version=comparisonVersion;
  try{
   if(!result||!selected.length)throw Error('Compare selected laps first.');
-  if(!$('pilot-token').value.trim())throw Error('Enter your private pilot access token.');
   const question=$('question').value.trim();if(!question||question.length>1000)throw Error('Question must be 1–1000 characters.');
   const guidance='Answer this as a focused diagnostic, not a full report. Use only computed evidence, distinguish possible causes from measurements, and do not invent named corners or pedal inputs. Finish with a heading exactly "Next Test" and one controlled experiment to review with an instructor. Question: ';
   const payload=JSON.stringify({laps:selected,question:guidance+question});
   if(new TextEncoder().encode(payload).length>3500000)throw Error('Select fewer laps.');
   clearAnswer();version=comparisonVersion;const controller=new AbortController();askController=controller;request={finished:false};askTracking=request;
   $('ask-button').disabled=true;$('answer').textContent='Reviewing lap evidence…';track('lab_ai_requested',{lap_count:selected.length,question_type:submittedQuestionType(question)});
-  const r=await fetch(endpoint+'/api/ask',{signal:AbortSignal.any([controller.signal,AbortSignal.timeout(75000)]),method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+$('pilot-token').value},body:payload});
+  const r=await fetch(endpoint+'/api/ask',{signal:AbortSignal.any([controller.signal,AbortSignal.timeout(75000)]),method:'POST',headers:{'Content-Type':'application/json'},body:payload});
   const d=await r.json();if(version!==comparisonVersion)return;
-  if(!r.ok)throw Error(r.status===403?'Access token was not accepted. Check your private pilot token.':d.detail||'Request failed.');
+  if(!r.ok)throw Error(r.status===403||r.status===503?'Public AI is not enabled yet. Your local telemetry comparison remains available.':r.status===429?'AI allowance reached. Your local telemetry comparison remains available.':d.detail||'Request failed.');
   if(typeof d.answer!=='string'||!d.answer.trim())throw Error('No answer was returned. Please try again.');
   renderAnswer(d.answer);finishAI(request,'succeeded');
  }catch(e){if(version!==comparisonVersion)return;finishAI(request,'failed');$('answer').textContent=e.message;}

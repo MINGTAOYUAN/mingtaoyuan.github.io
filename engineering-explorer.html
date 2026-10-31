@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Ask engineering questions, explore source-linked learning notes, and separate AI explanations from evidence.">
+<title>Engineering Knowledge Explorer — Mingtao Yuan</title>
+<link rel="stylesheet" href="assets/race/site.css"><link rel="stylesheet" href="assets/race/knowledge-explorer.css">
+<script src="assets/race/knowledge-search.js" defer></script><script src="assets/race/knowledge-explorer.js" defer></script>
+</head>
+<body>
+<header class="nav"><a class="brand" href="index.html">Home</a><nav><a href="motorsport.html">Motorsport</a><a href="racecraft.html">Data project</a><a href="rwth.html">RWTH Aachen</a><a class="active" href="ai-lab.html">AI Lab</a><a href="index.html#about">About</a></nav></header>
+<main class="wrap explorer">
+<p class="eyebrow">AI LAB / ENGINEERING KNOWLEDGE EXPLORER</p>
+<h1>Start with<br>a <em>question.</em></h1>
+<p class="lead">From a corner on the track to the energy inside a battery. Find a principle, inspect its sources, then explore an explanation.</p>
+<div class="explorer-meta"><span id="library-count">Loading learning notes…</span><span>English + 中文 keywords</span><span>Sources before conclusions</span></div>
+<section class="search-panel" aria-labelledby="search-title">
+<p class="eyebrow">01 / FIND THE PRINCIPLE</p><h2 id="search-title">What are you curious about?</h2>
+<form id="knowledge-form"><label for="engineering-question">Your engineering question</label><textarea id="engineering-question" rows="3" maxlength="1000" required placeholder="Why does braking leave less grip for turning?"></textarea><button id="search-button" type="submit" disabled>Find relevant knowledge <span aria-hidden="true">↗</span></button></form>
+<div class="examples" aria-label="Example questions"><button type="button" data-question="Why does braking leave less grip for turning?">Braking + turning</button><button type="button" data-question="Why does aerodynamic drag rise with speed?">Aerodynamic drag</button><button type="button" data-question="冬天为什么会影响电动车续航？">冬季续航</button><button type="button" data-question="What is thermal runaway?">Battery safety</button></div>
+<p class="small">Search runs in your browser and has no AI charge. English words and selected Chinese keywords match our curated notes; this is not a web search or an exhaustive semantic search.</p>
+<p id="search-status" role="status" aria-live="polite">Preparing the knowledge library…</p>
+</section>
+<section id="evidence-section" hidden aria-labelledby="evidence-title"><div class="section-top"><div><p class="eyebrow">02 / KNOWLEDGE BASE EVIDENCE</p><h2 id="evidence-title">Inspect what we found.</h2></div><p class="small">Related notes are starting points.<br>A match does not verify a specific claim.</p></div><div id="knowledge-results" class="knowledge-results"></div></section>
+<section id="generation-section" class="generation-panel" hidden aria-labelledby="generation-title"><p class="eyebrow">03 / CONNECT THE IDEAS</p><h2 id="generation-title">Ask for an explanation.</h2><p>The AI receives your question and the matched notes. Its explanation is generated, and its reasoning may be wrong. Use the linked sources to check it.</p><button id="generate-button" type="button" disabled>Generate AI explanation ↗</button><p id="ai-status" role="status" aria-live="polite">Checking AI availability…</p><p class="small">No visitor token required when public AI is enabled. Shared request limits apply. Do not submit personal information or confidential material. Questions and answers are not saved by this app or sent to analytics. The AI provider and hosting services may retain operational data; store=false is not a promise of zero retention.</p>
+<div id="generated-answer" hidden><section><h3>AI explanation · based on retrieved notes</h3><div id="generated-explanation"></div></section><section class="inference"><h3>AI reasoning · inference, not verified evidence</h3><p id="generated-reasoning"></p></section><section class="uncertainty"><h3>Unknowns &amp; limits · check before concluding</h3><p id="generated-unknowns"></p></section></div></section>
+<details class="method"><summary>How the explorer works</summary><p>Thirty original introductory notes connect motorsport physics, vehicle energy, electric propulsion and battery safety. Deterministic keyword ranking selects up to four related entries. The backend repeats retrieval using its own copy of the library, then checks the structure and citation IDs of any generated answer. Citation checks cannot prove that every sentence is correct.</p><p>Sources are public references or clearly labelled original method notes and simplified models. Source organizations have not endorsed these explanations. One additional chemistry comparison is withheld pending direct source review. No private RWTH course slides or handouts are indexed, uploaded or reproduced.</p><p>Knowledge search keeps working when AI is unavailable or its allowance is reached. The <a href="ai-lab.html#data-explorer">Data Explorer</a> separately compares actual telemetry. Read the <a href="motorsport-science.html">Motorsport Science models</a> or the <a href="automotive-knowledge.html">automotive learning cards</a> for further context.</p></details>
+</main><footer>© 2026 Mingtao Yuan <span><a href="ai-lab.html">Return to AI Lab ↑</a></span></footer>
+</body></html>

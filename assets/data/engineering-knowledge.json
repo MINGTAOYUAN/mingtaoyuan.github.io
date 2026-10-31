@@ -1,0 +1,702 @@
+{
+  "version": "2026-10-31.1",
+  "method": "Original summaries and explicitly labelled model or method notes; no private course files, embeddings, or scraped source text. One inherited chemistry comparison is withheld pending a direct source.",
+  "sources": {
+    "DOE_EV": {
+      "title": "U.S. DOE Alternative Fuels Data Center — Electricity",
+      "url": "https://afdc.energy.gov/fuels/electricity"
+    },
+    "DOE_FCEV": {
+      "title": "U.S. DOE — How Fuel Cell Electric Vehicles Work",
+      "url": "https://afdc.energy.gov/vehicles/how-do-fuel-cell-electric-cars-work"
+    },
+    "DOE_FC": {
+      "title": "U.S. DOE — Fuel Cell Basics",
+      "url": "https://www.energy.gov/cmei/fuels/fuel-cell-basics"
+    },
+    "NHTSA": {
+      "title": "NHTSA — Electric and Hybrid Vehicles: Battery, Charging and Safety",
+      "url": "https://www.nhtsa.gov/vehicle-safety/electric-and-hybrid-vehicles"
+    },
+    "NAS": {
+      "title": "National Academies — Non-Powertrain Technologies",
+      "url": "https://www.nationalacademies.org/read/26092/chapter/9"
+    },
+    "ORNL": {
+      "title": "ORNL — Lithium-Ion UPS Battery Research and Commentary (2023)",
+      "url": "https://info.ornl.gov/sites/publications/Files/Pub191560.pdf",
+      "scope": "Stationary UPS batteries; cited only for general cell-failure mechanisms and layered testing, not automotive certification."
+    },
+    "MECHANICS": {
+      "title": "OpenStax — Centripetal Force",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/6-3-centripetal-force"
+    },
+    "ENERGY": {
+      "title": "OpenStax — Kinetic Energy",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/7-2-kinetic-energy"
+    },
+    "TRANSFER": {
+      "title": "NASA Speed News — Weight Transfer and Racecar Dynamics",
+      "url": "https://nasaspeed.news/columns/driver-instruction/weight-watching-understanding-weight-transfer-and-racecar-dynamics/"
+    },
+    "METHOD": {
+      "title": "Mingtao AI Lab — Original experimental-method notes",
+      "url": "https://mingtaoyuan.github.io/motorsport-science.html"
+    },
+    "WINTER": {
+      "title": "NHTSA — Winter Driving Tips",
+      "url": "https://www.nhtsa.gov/winter-driving-tips"
+    },
+    "TIRES": {
+      "title": "NHTSA — Tires",
+      "url": "https://www.nhtsa.gov/vehicle-safety/tires"
+    },
+    "POWER": {
+      "title": "OpenStax — Power",
+      "url": "https://openstax.org/books/university-physics-volume-1/pages/7-4-power"
+    }
+  },
+  "entries": [
+    {
+      "id": "ms-q0_0",
+      "topic": "Racing Lines & Trajectories",
+      "question": "Why is the shortest line not always the fastest?",
+      "answer": "A shorter path may require a tighter radius and lower speed. The quicker route depends on travel time across entry, apex and exit, not distance alone.",
+      "limits": "Corner geometry, available grip and the following straight all matter. This is a qualitative application of circular-motion physics, not proof of an optimum racing line.",
+      "next_test": "Compare path length and speed profiles, then compute elapsed time across the same section.",
+      "source_ids": [
+        "MECHANICS"
+      ],
+      "basis": "simplified_model",
+      "aliases": [
+        "racing line",
+        "shortest",
+        "fastest",
+        "trajectory",
+        "赛车走线",
+        "行驶轨迹",
+        "最短路线"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q0_1",
+      "topic": "Racing Lines & Trajectories",
+      "question": "What is an early versus late apex?",
+      "answer": "The apex is the closest point of a line to the inside of a turn. An early apex occurs earlier along the corner; a late apex shifts it toward the exit.",
+      "limits": "Neither apex strategy is universally fastest; linked corners change the optimum.",
+      "next_test": "Sketch two routes and compare exit position and speed under matched conditions.",
+      "source_ids": [
+        "METHOD"
+      ],
+      "basis": "original_method",
+      "aliases": [
+        "apex",
+        "early apex",
+        "late apex",
+        "弯心",
+        "转弯时机"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q0_2",
+      "topic": "Racing Lines & Trajectories",
+      "question": "What can GPS paths tell us?",
+      "answer": "Position traces reveal approximate trajectories, while synchronized speed and time traces show where laps differ.",
+      "limits": "GPS uncertainty and different entry states prevent attributing gains to line alone.",
+      "next_test": "Compare several laps at matched distance locations.",
+      "source_ids": [
+        "METHOD"
+      ],
+      "basis": "original_method",
+      "aliases": [
+        "gps",
+        "position",
+        "trajectory",
+        "轨迹",
+        "定位"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q1_0",
+      "topic": "Braking & Energy",
+      "question": "Where does braking energy go?",
+      "answer": "Friction brakes convert much of the vehicle's kinetic energy into heat; drag and rolling losses also dissipate energy. Regenerative braking can recover some energy in equipped vehicles.",
+      "limits": "This simplified model excludes rotating components and vehicle-specific brake balance.",
+      "next_test": "Compare kinetic energy at two speeds using the model below.",
+      "source_ids": [
+        "ENERGY",
+        "DOE_FCEV"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "braking energy",
+        "kinetic",
+        "heat",
+        "制动能量",
+        "刹车能量",
+        "动能",
+        "热量",
+        "动量"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q1_1",
+      "topic": "Braking & Energy",
+      "question": "Why does braking change wheel loads?",
+      "answer": "Longitudinal deceleration creates a pitching moment and changes normal forces, increasing front and reducing rear axle load under typical braking conditions.",
+      "limits": "Load transfer is not identical to body pitch; suspension and road conditions matter.",
+      "next_test": "Review weight transfer as a function of deceleration, center-of-gravity height and wheelbase.",
+      "source_ids": [
+        "TRANSFER"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "wheel loads",
+        "weight transfer",
+        "pitch",
+        "load transfer",
+        "重心转移",
+        "载荷转移",
+        "轴荷"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q1_2",
+      "topic": "Braking & Energy",
+      "question": "What is trail braking?",
+      "answer": "Trail braking means progressively releasing brake force while steering into a corner, balancing longitudinal and lateral tire demands.",
+      "limits": "It is an advanced track technique, not an instruction to practice on public roads.",
+      "next_test": "Use a combined-force diagram to reason about changing demands.",
+      "source_ids": [
+        "TRANSFER"
+      ],
+      "basis": "simplified_model",
+      "aliases": [
+        "trail braking",
+        "brake release",
+        "循迹刹车",
+        "拖刹"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q2_0",
+      "topic": "Tire Grip & Environment",
+      "question": "How do braking and turning share tire grip?",
+      "answer": "A tire must supply combined longitudinal and lateral force; using much of its capacity in braking leaves less available for turning.",
+      "limits": "Real tires are load sensitive and may follow a noncircular force envelope. The circle is an illustrative approximation, not a measured tire envelope.",
+      "next_test": "Use the simplified friction-circle model below.",
+      "source_ids": [
+        "TRANSFER"
+      ],
+      "basis": "simplified_model",
+      "aliases": [
+        "friction circle",
+        "combined force",
+        "braking and turning",
+        "摩擦圆",
+        "抓地力",
+        "刹车转弯"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q2_1",
+      "topic": "Tire Grip & Environment",
+      "question": "How do temperature and pressure affect tires?",
+      "answer": "Tire pressure and temperature affect tire operating conditions. Use vehicle and tire manufacturer guidance rather than a universal hotter-is-better rule.",
+      "limits": "The cited road-tire guidance does not establish a racing compound temperature window or track pressure target.",
+      "next_test": "Compare tire condition logs under repeatable test conditions.",
+      "source_ids": [
+        "TIRES"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "tire temperature",
+        "tyre temperature",
+        "tire pressure",
+        "胎温",
+        "胎压",
+        "轮胎温度"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q2_2",
+      "topic": "Tire Grip & Environment",
+      "question": "Why does a wet surface change grip?",
+      "answer": "Water changes the tire–road contact conditions; standing water can reduce effective contact and lead to hydroplaning.",
+      "limits": "Grip depends on tread, water depth, speed and surface texture.",
+      "next_test": "Compare wet and dry test results while recording temperature and tire type.",
+      "source_ids": [
+        "TIRES"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "wet",
+        "rain",
+        "hydroplaning",
+        "湿地",
+        "积水",
+        "雨天"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q3_0",
+      "topic": "Vehicle Dynamics",
+      "question": "What sets lateral acceleration in a turn?",
+      "answer": "For steady motion along a circular path, lateral acceleration equals speed squared divided by radius.",
+      "limits": "This kinematic relation does not guarantee the tire can deliver the required force.",
+      "next_test": "Change speed and radius in the cornering model below.",
+      "source_ids": [
+        "MECHANICS"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "lateral acceleration",
+        "corner radius",
+        "v squared",
+        "横向加速度",
+        "转弯半径",
+        "向心力"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q3_1",
+      "topic": "Vehicle Dynamics",
+      "question": "What causes understeer and oversteer?",
+      "answer": "Understeer refers to a vehicle turning less than required for a given steering input as conditions change; oversteer refers to greater yaw response and can involve rear tire grip limits.",
+      "limits": "A single video frame or lateral-g peak is insufficient to diagnose the cause.",
+      "next_test": "Compare steering, yaw rate and speed observations.",
+      "source_ids": [
+        "TRANSFER"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "understeer",
+        "oversteer",
+        "yaw",
+        "转向不足",
+        "转向过度",
+        "甩尾"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q3_2",
+      "topic": "Vehicle Dynamics",
+      "question": "Why does corner exit matter?",
+      "answer": "A corner exit determines the speed carried into the next section; an earlier peak speed at the apex may not mean the fastest overall section.",
+      "limits": "Optimal line choice depends on what comes next.",
+      "next_test": "Compare cumulative time over the corner and following straight.",
+      "source_ids": [
+        "METHOD"
+      ],
+      "basis": "original_method",
+      "aliases": [
+        "corner exit",
+        "exit speed",
+        "出弯",
+        "出弯速度"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q4_0",
+      "topic": "Experimental Methods",
+      "question": "Can a speed trace prove where braking began?",
+      "answer": "GPS speed and deceleration suggest where velocity changes, but they do not directly measure brake pedal pressure or throttle position.",
+      "limits": "Avoid claiming specific driver inputs from speed alone.",
+      "next_test": "Combine speed data with synchronized video and pedal channels when available.",
+      "source_ids": [
+        "METHOD"
+      ],
+      "basis": "original_method",
+      "aliases": [
+        "speed trace",
+        "brake pressure",
+        "pedal",
+        "刹车点",
+        "刹车压力"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q4_1",
+      "topic": "Experimental Methods",
+      "question": "How can two racing lines be compared fairly?",
+      "answer": "Choose repeatable entry speed, tire and road conditions and comparable measurement windows, then repeat trials and compare uncertainty.",
+      "limits": "Two laps from different sessions are observations, not a controlled experiment.",
+      "next_test": "Change one variable at a time and collect several representative laps.",
+      "source_ids": [
+        "METHOD"
+      ],
+      "basis": "original_method",
+      "aliases": [
+        "fair comparison",
+        "controlled experiment",
+        "对照实验",
+        "公平比较"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "ms-q4_2",
+      "topic": "Experimental Methods",
+      "question": "How can data support a useful hypothesis?",
+      "answer": "State a measurable prediction, define conditions and collect repeat observations. A result that conflicts with the prediction should change the hypothesis.",
+      "limits": "Correlation does not by itself establish causation.",
+      "next_test": "Document question, method, result and limitations.",
+      "source_ids": [
+        "METHOD"
+      ],
+      "basis": "original_method",
+      "aliases": [
+        "hypothesis",
+        "correlation",
+        "causation",
+        "假设",
+        "因果",
+        "相关性"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e0-0",
+      "topic": "Vehicle Energy & Road Loads",
+      "question": "Why does aerodynamic drag become more important as speed rises?",
+      "answer": "In a simple steady-flow model, drag force grows approximately with the square of speed; the power required to overcome it grows approximately with the cube of speed.",
+      "limits": "Real vehicles depend on drag coefficient, frontal area, air density, wind and road conditions.",
+      "source_ids": [
+        "NAS"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "aerodynamic drag",
+        "drag",
+        "air resistance",
+        "aerodynamics",
+        "风阻",
+        "空气阻力"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e0-1",
+      "topic": "Vehicle Energy & Road Loads",
+      "question": "Why does tire rolling resistance affect range?",
+      "answer": "Tires deform as they roll and dissipate energy. Reducing rolling resistance can lower the energy required to move a vehicle.",
+      "limits": "Grip, wear, comfort, inflation pressure and rolling resistance must be considered together.",
+      "source_ids": [
+        "NAS"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "rolling resistance",
+        "rolling",
+        "滚动阻力"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e0-2",
+      "topic": "Vehicle Energy & Road Loads",
+      "question": "How does vehicle mass affect energy demand?",
+      "answer": "Greater mass increases the energy needed to accelerate and often increases rolling and climbing loads. Regenerative braking can recover only part of energy during deceleration.",
+      "limits": "Total trip consumption also depends on speed profile, gradients and auxiliary systems.",
+      "source_ids": [
+        "NAS"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "mass",
+        "weight",
+        "vehicle mass",
+        "车重",
+        "质量"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e0-3",
+      "topic": "Vehicle Energy & Road Loads",
+      "question": "What is the difference between power and energy?",
+      "answer": "Energy is the amount available or used, measured in joules or watt-hours; power is the rate of energy transfer, measured in watts.",
+      "limits": "High peak motor power does not alone predict a vehicle's driving range.",
+      "source_ids": [
+        "POWER"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "power",
+        "energy",
+        "kilowatt",
+        "功率",
+        "能量"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e1-0",
+      "topic": "Electric Propulsion",
+      "question": "What does an electric traction motor do?",
+      "answer": "An electric traction motor converts electrical input into mechanical torque that can drive the wheels through a transmission.",
+      "limits": "System efficiency also depends on inverter, gearing and operating point.",
+      "source_ids": [
+        "DOE_FCEV"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "motor",
+        "traction motor",
+        "torque",
+        "电机",
+        "扭矩"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e1-1",
+      "topic": "Electric Propulsion",
+      "question": "How can regenerative braking recover energy?",
+      "answer": "A motor-generator may operate as a generator during deceleration, converting some vehicle kinetic energy to electrical energy that is stored in a battery.",
+      "limits": "Battery acceptance, traction and braking system limits constrain regeneration.",
+      "source_ids": [
+        "DOE_FCEV"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "regenerative",
+        "regeneration",
+        "regen",
+        "能量回收",
+        "再生制动"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e1-2",
+      "topic": "Electric Propulsion",
+      "question": "Why do electric drivetrains still need thermal control?",
+      "answer": "Traction motors, power electronics and batteries generate heat and have operating-temperature limits, so thermal systems support efficiency and component durability.",
+      "limits": "Cooling needs vary with design, loading and ambient conditions.",
+      "source_ids": [
+        "DOE_FCEV"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "cooling",
+        "thermal control",
+        "thermal management",
+        "散热",
+        "热管理"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e1-3",
+      "topic": "Electric Propulsion",
+      "question": "How do fuel-cell electric vehicles differ from battery-electric vehicles?",
+      "answer": "Fuel-cell vehicles generate electricity onboard from hydrogen using fuel cells; battery-electric vehicles primarily use electricity stored in rechargeable batteries.",
+      "limits": "Energy-system comparisons must consider upstream fuel and electricity production, not only tailpipe output.",
+      "source_ids": [
+        "DOE_FCEV"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "fuel cell",
+        "hydrogen",
+        "fcev",
+        "bev",
+        "氢能",
+        "燃料电池"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e2-0",
+      "topic": "Lithium-Ion Battery Basics",
+      "question": "What does a battery management system do?",
+      "answer": "Battery packs use monitoring and controls to manage operation and protect cells; temperature management is important for performance and lifespan.",
+      "limits": "Specific BMS functions and limits differ between manufacturers.",
+      "source_ids": [
+        "NHTSA"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "bms",
+        "battery management",
+        "电池管理"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e2-1",
+      "topic": "Lithium-Ion Battery Basics",
+      "question": "What are some differences between LFP and nickel-rich battery chemistries?",
+      "answer": "LFP often offers lower materials cost and long cycle life while some nickel-rich chemistries support higher cell energy density.",
+      "limits": "Pack-level range, safety and cost depend on design, not chemistry alone.",
+      "source_ids": [
+        "NHTSA"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "lfp",
+        "nickel",
+        "chemistry",
+        "磷酸铁锂",
+        "三元"
+      ],
+      "status": "pending_source_review",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e2-2",
+      "topic": "Lithium-Ion Battery Basics",
+      "question": "Why can cold weather reduce EV battery performance?",
+      "answer": "Cold weather can reduce electric-vehicle range. Battery and cabin temperature control consume energy that would otherwise help propel the vehicle.",
+      "limits": "Charging behavior is managed by the vehicle and battery system, not by a universal temperature threshold.",
+      "source_ids": [
+        "WINTER",
+        "NHTSA"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "cold",
+        "winter",
+        "range",
+        "低温",
+        "冬天",
+        "续航"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e2-3",
+      "topic": "Lithium-Ion Battery Basics",
+      "question": "Why doesn't every EV charge at the same rate?",
+      "answer": "Vehicle battery design, thermal management and state of charge influence accepted power; stations also have different capabilities.",
+      "limits": "A charger's maximum rating does not ensure that power is maintained throughout charging.",
+      "source_ids": [
+        "NHTSA"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "charging",
+        "charge rate",
+        "充电",
+        "快充"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e3-0",
+      "topic": "Safety & Future Technologies",
+      "question": "What is thermal runaway?",
+      "answer": "Thermal runaway is a self-heating process in which battery reactions produce heat that can accelerate further reactions and cause hazardous outcomes.",
+      "limits": "The initiating conditions and propagation depend on cell materials, damage and protection systems. The linked report concerns stationary UPS systems; no EV-specific test compliance is inferred.",
+      "source_ids": [
+        "ORNL"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "thermal runaway",
+        "runaway",
+        "热失控"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e3-1",
+      "topic": "Safety & Future Technologies",
+      "question": "Why is battery temperature management a safety issue?",
+      "answer": "Extreme temperatures can damage batteries and affect performance; thermal systems help maintain operating conditions and reduce risk.",
+      "limits": "Temperature control is one layer of safety, not a guarantee against all failures.",
+      "source_ids": [
+        "NHTSA"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "battery temperature",
+        "battery cooling",
+        "电池温度"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e3-2",
+      "topic": "Safety & Future Technologies",
+      "question": "What is the function of a fuel-cell membrane?",
+      "answer": "In a common polymer electrolyte membrane fuel cell, the membrane carries protons between electrodes while electrons pass through an external circuit to supply power.",
+      "limits": "Fuel cells need supporting air, hydrogen, cooling and control systems.",
+      "source_ids": [
+        "DOE_FC"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "membrane",
+        "proton",
+        "质子",
+        "膜"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    },
+    {
+      "id": "auto-e3-3",
+      "topic": "Safety & Future Technologies",
+      "question": "Why is battery safety evaluated at both cell and pack levels?",
+      "answer": "A cell may fail locally, but mechanical packaging, electrical protection and thermal interactions determine how a pack responds to faults.",
+      "limits": "Do not infer pack-level safety solely from one cell chemistry or lab test. The linked report concerns stationary UPS systems; no EV-specific test compliance is inferred.",
+      "source_ids": [
+        "ORNL"
+      ],
+      "basis": "public_reference",
+      "aliases": [
+        "cell",
+        "pack",
+        "battery safety",
+        "电芯",
+        "电池包",
+        "电池安全"
+      ],
+      "status": "included",
+      "reviewed_on": "2026-10-31"
+    }
+  ]
+}

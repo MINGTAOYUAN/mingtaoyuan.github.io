@@ -39,7 +39,7 @@ async function check(){
  for(const response of [{ok:false,json:async()=>({detail:'Rejected'})},{ok:true,json:async()=>({answer:''})},{ok:true,json:async()=>{throw Error('Bad JSON');}}]){
   l=lab();p=l.submit();l.requests[0].resolve(response);await p;assert.deepEqual(l.names(),['lab_ai_requested','lab_ai_failed']);
  }
- l=lab();l.node('pilot-token').value='';await l.submit();assert.equal(l.requests.length,0);assert.equal(l.events.length,0);
+ l=lab();p=l.submit();assert.ok(!('Authorization' in l.requests[0].options.headers));l.requests[0].resolve({ok:false,json:async()=>({detail:'Quota reached'})});await p;
  // Old response/catch must not complete or clear a replacement request.
  l=lab();p=l.submit();vm.runInContext('clearAnswer();',l.context);const next=l.submit();await p;
  assert.equal(l.node('ask-button').disabled,true);
