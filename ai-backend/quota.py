@@ -16,7 +16,12 @@ end
 return 1
 '''
 def settings():
-    url=os.getenv('UPSTASH_REDIS_REST_URL',''); token=os.getenv('UPSTASH_REDIS_REST_TOKEN','');salt=os.getenv('LAB_QUOTA_SALT','')
+    url=os.getenv('UPSTASH_REDIS_REST_URL',''); token=os.getenv('UPSTASH_REDIS_REST_TOKEN','')
+    # Vercel Marketplace injects KV_* names. Use a complete naming family;
+    # never combine an endpoint and credential from different configurations.
+    if not url and not token:
+        url=os.getenv('KV_REST_API_URL',''); token=os.getenv('KV_REST_API_TOKEN','')
+    salt=os.getenv('LAB_QUOTA_SALT','')
     parsed=urlsplit(url)
     if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or len(salt)<32 or not token:
         raise HTTPException(503,'AI is paused until shared quota controls are configured. Knowledge search remains available.')
