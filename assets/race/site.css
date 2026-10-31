@@ -53,3 +53,13 @@
 .featured-track-grid figcaption strong{font:700 1rem 'Space Grotesk',sans-serif;letter-spacing:.03em}
 .featured-track-grid figcaption span{font-size:.89rem;color:var(--muted)}
 @media(max-width:750px){.featured-track-videos{padding-top:65px;padding-bottom:55px}.featured-track-grid{grid-template-columns:1fr;gap:32px}.featured-play{width:58px;height:42px}}
+
+/* Home-page preview of the existing U-turn comparison. */
+.corner-feature{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);align-items:center;gap:50px}
+.corner-preview{margin:0;min-width:0;border:1px solid var(--rule);background:var(--panel)}
+.corner-preview iframe{display:block;width:100%;height:340px;border:0;background:#111b1c}
+.corner-preview figcaption{padding:11px 14px;color:var(--muted);font-size:.78rem}
+.corner-preview a:hover{color:var(--accent)}
+.corner-preview a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.corner-feature h2{font-size:clamp(2.5rem,4.6vw,4.6rem);margin-bottom:24px}
+@media(max-width:750px){.corner-feature{grid-template-columns:minmax(0,1fr);gap:28px}.corner-preview iframe{height:320px}}
