@@ -3,3 +3,9 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
+
+# Local browser QA output (contains explicitly simulated AI fixtures)
+preview-build/
+.openai/
+__pycache__/
+*.pyc

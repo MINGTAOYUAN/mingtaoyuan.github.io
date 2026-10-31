@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const engine=require('../assets/race/knowledge-search.js'),data=require('../assets/data/engineering-knowledge.json');
+assert.deepEqual(data,require('../ai-backend/knowledge.json'));
+const cases=[['Why does braking leave less grip for turning?','ms-q2_0'],['Why does aerodynamic drag rise with speed?','auto-e0-0'],['冬天为什么会影响电动车续航？','auto-e2-2'],['What is thermal runaway?','auto-e3-0'],['转弯半径如何影响横向加速度','ms-q3_0'],['How can regenerative braking recover energy?','auto-e1-1'],['What does a battery management system do?','auto-e2-0'],['Why does braking change wheel loads?','ms-q1_1']];
+for(const [q,id] of cases)assert.equal(engine.search(data,q)[0].entry.id,id,q);
+for(const q of ['Who won the football game?','你好','What is the capital of France?'])assert.equal(engine.search(data,q).length,0);
+assert.equal(engine.search(data,'LFP nickel chemistry')[0].entry.id,'auto-e2-1');
+const withheld=structuredClone(data);withheld.entries.find(e=>e.id==='auto-e2-1').status='pending_source_review';assert.ok(!engine.search(withheld,'LFP nickel chemistry').some(h=>h.entry.id==='auto-e2-1'));
+for(const entry of data.entries)assert.equal(engine.search(data,entry.question)[0].entry.id,entry.id);
+assert.equal(data.entries.filter(e=>e.status==='included').length,31);
+for(const e of data.entries)for(const id of e.source_ids)assert.match(data.sources[id].url,/^https:\/\//);
+assert.ok(!/gtag|localStorage|sessionStorage|innerHTML|location.search/.test(fs.readFileSync(require.resolve('../assets/race/knowledge-explorer.js'),'utf8')));
+console.log('PASS: retrieval relevance, Chinese aliases, no-match, source-reviewed comparison / withheld-entry filtering, shared corpus and privacy checks.');
