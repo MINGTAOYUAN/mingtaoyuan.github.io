@@ -102,9 +102,13 @@
 .report-body h2[id],.study-head[id]{scroll-margin-top:110px}
 @media(max-width:750px){.study-head{padding-bottom:30px}.study-context{padding-bottom:22px}.study-toc{gap:12px 18px}.study-interactive .chart{padding:12px 8px}.report-body h2[id],.study-head[id]{scroll-margin-top:150px}}
 
-/* Family photographs give the home About section its personal starting point. */
-.childhood-photos{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:8px}
+/* Compact childhood photographs beside the home About story. */
+.about-origin{grid-template-columns:minmax(0,270px) minmax(0,1fr);column-gap:50px;row-gap:20px}
+.about-origin>.eyebrow{grid-column:1/-1;margin-bottom:0}
+.about-origin>div{min-width:0}
+.childhood-photos{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-self:start}
 .childhood-photos figure{margin:0;min-width:0}
 .childhood-photos img{width:100%;height:auto;display:block}
-.childhood-photos figcaption{color:var(--muted);font-size:.88rem;padding-top:12px}
-@media(max-width:750px){.childhood-photos{grid-template-columns:1fr;gap:26px;margin-top:18px}}
+.childhood-photos figcaption{color:var(--muted);font-size:.78rem;line-height:1.5;padding-top:8px}
+@media(min-width:601px) and (max-width:750px){.about-origin{grid-template-columns:minmax(0,200px) minmax(0,1fr);column-gap:28px}.about-origin h2{font-size:2.5rem}}
+@media(max-width:600px){.about-origin{grid-template-columns:minmax(0,1fr);gap:24px}.childhood-photos{width:min(100%,270px)}}
