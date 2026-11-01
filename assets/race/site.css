@@ -82,3 +82,22 @@
 @media(max-width:750px){.final-corner-details{padding:16px}.final-corner-table th,.final-corner-table td{padding:10px}.final-corner-table table{font-size:.85rem}}
 
 @media(max-width:750px){.final-corner-figure{overflow-x:auto}.final-corner-figure>a{min-width:760px}}
+
+
+/* A single reading path for the integrated telemetry study. */
+.study-head{padding-bottom:42px}
+.study-context{padding-top:0;padding-bottom:30px;border-bottom:1px solid var(--rule)}
+.study-context p{max-width:850px;color:#cbd1ce;font-size:1.03rem}
+.study-context .study-byline{font-size:.85rem;color:var(--muted);margin-bottom:16px}
+.study-toc{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;padding-top:24px;padding-bottom:24px;border-bottom:1px solid var(--rule)}
+.study-toc>span{flex-basis:100%;font-size:.72rem;letter-spacing:.16em;color:var(--muted);font-weight:700}
+.study-toc a{font-size:.87rem;color:var(--accent);border-bottom:1px solid transparent}
+.study-toc a:hover{border-bottom-color:var(--accent)}
+.study-toc a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.study-interactive{margin:30px 0 34px}
+.report-body .study-interactive h3{font-size:1.35rem;letter-spacing:-.025em;color:var(--ink);margin:0}
+.study-interactive .legend{flex-wrap:wrap}
+.study-interactive .chart-caption{font-size:.88rem;line-height:1.6}
+.report-body a[href^="#"]{color:var(--accent);text-decoration:underline}
+.report-body h2[id],.study-head[id]{scroll-margin-top:110px}
+@media(max-width:750px){.study-head{padding-bottom:30px}.study-context{padding-bottom:22px}.study-toc{gap:12px 18px}.study-interactive .chart{padding:12px 8px}.report-body h2[id],.study-head[id]{scroll-margin-top:150px}}
