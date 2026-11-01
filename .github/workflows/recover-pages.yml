@@ -1,0 +1,16 @@
+name: Clear stalled Pages deployment
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/recover-pages.yml']
+permissions:
+  pages: write
+jobs:
+  clear-stalled-deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Cancel the specific stale Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/MINGTAOYUAN/mingtaoyuan.github.io/pages/deployments/62d52b1e166c8e8bebe81c49beaebfaa1f6a7aaf/cancel
