@@ -45,11 +45,11 @@
   finally{if(v===version){controller=null;$('generate-button').disabled=!available;}}
  });
  try{
-  const response=await fetch('assets/data/engineering-knowledge.json');if(!response.ok)throw Error();data=await response.json();
+  const response=await fetch('assets/data/engineering-knowledge.json',{cache:'no-store'});if(!response.ok)throw Error();data=await response.json();
   $('library-count').textContent=data.entries.filter(e=>e.status==='included').length+' searchable learning notes';$('search-button').disabled=false;
   $('search-status').textContent='Ask a question or choose an example. No AI request is made by searching.';
  }catch{ $('search-status').textContent='The knowledge library could not load. Reload this page to try again.';return; }
- try{const r=await fetch(endpoint+'/api/health',{signal:AbortSignal.timeout(7000)});if(r.ok){const h=await r.json();available=h.ai_enabled===true&&h.knowledge_version===data.version;}}catch{/* Local search is independent of the backend. */}
+ try{const r=await fetch(endpoint+'/api/health',{cache:'no-store',signal:AbortSignal.timeout(7000)});if(r.ok){const h=await r.json();available=h.ai_enabled===true&&h.knowledge_version===data.version;}}catch{/* Local search is independent of the backend. */}
  $('ai-status').textContent=available?'AI is available within the shared request allowance.':'AI is not enabled for this library yet. You can read all matched notes and sources.';
  $('generate-button').disabled=!available||!hits.length;
 })();
