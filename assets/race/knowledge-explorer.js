@@ -1,7 +1,7 @@
 'use strict';
 (async function(){
  const $=id=>document.getElementById(id),endpoint='https://mingtao-ai-backend.vercel.app';
- let data,hits=[],currentQuestion='',controller=null,version=0,available=false;
+ let data,hits=[],currentQuestion='',controller=null,version=0,available=true,availabilityMessage='Checking AI availability…';
  function clearGenerated(){version++;if(controller)controller.abort();controller=null;$('generated-answer').hidden=true;$('generate-button').disabled=true;}
  function paragraph(host,text,cls){const p=document.createElement('p');p.textContent=text;if(cls)p.className=cls;host.append(p);return p;}
  function showSources(host,entry){
@@ -24,7 +24,7 @@
   $('generate-button').disabled=!available||!hits.length;
  }
  $('engineering-question').addEventListener('input',()=>{clearGenerated();$('ai-status').textContent='Search again to update the evidence for your edited question.';});
- $('knowledge-form').addEventListener('submit',e=>{e.preventDefault();if(data){runSearch();$('ai-status').textContent=available?'AI is available within the shared request allowance.':'AI is not enabled for this library yet. You can read all matched notes and sources.';}});
+ $('knowledge-form').addEventListener('submit',e=>{e.preventDefault();if(data){runSearch();$('ai-status').textContent=availabilityMessage;}});
  for(const b of document.querySelectorAll('[data-question]'))b.addEventListener('click',()=>{$('engineering-question').value=b.dataset.question;$('knowledge-form').requestSubmit();});
  $('generate-button').addEventListener('click',async()=>{
   if(controller||!available||!hits.length||currentQuestion!==$('engineering-question').value.trim())return;
@@ -32,7 +32,7 @@
   try{
    const response=await fetch(endpoint+'/api/knowledge/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:currentQuestion}),signal:AbortSignal.any([controller.signal,AbortSignal.timeout(45000)])});
    if(v!==version)return;
-   if(!response.ok)throw Error(response.status===429?'AI allowance reached. The notes and sources above remain available.':response.status===403||response.status===503||response.status===404?'AI is currently unavailable. The notes and sources above remain available.':'AI could not return a verified explanation. Please use the source-linked notes.');
+   if(!response.ok)throw Error(response.status===429?'AI allowance reached. The notes and sources above remain available.':response.status===403?'Public AI is disabled by the server. The notes and sources remain available.':response.status===503?'AI service or shared quota controls are temporarily unavailable. The notes and sources remain available.':response.status===404?'AI endpoint was not found. Please try again later.':'AI could not return a verified explanation. Please use the source-linked notes.');
    const value=await response.json();if(v!==version)return;
    const g=value.generated,allowed=new Set(hits.map(h=>h.entry.id));
    if(value.version!==data.version||value.mode!=='generated'||!g||!Array.isArray(g.explanation)||!g.explanation.length||g.explanation.length>4||typeof g.reasoning!=='string'||typeof g.unknowns!=='string')throw Error('AI response could not be verified. Please use the source-linked notes.');
@@ -41,7 +41,7 @@
    for(const p of g.explanation){paragraph(host,p.text);const refs=paragraph(host,'Based on: ','small');for(const id of [...new Set(p.evidence_ids)]){const a=document.createElement('a');a.href='#note-'+id;a.textContent=id;refs.append(a,document.createTextNode(' '));}}
    $('generated-reasoning').textContent=g.reasoning;$('generated-unknowns').textContent=g.unknowns;$('generated-answer').hidden=false;
    $('ai-status').textContent='AI explanation ready. Citation IDs were checked; accuracy still needs your judgment.';
-  }catch(error){if(v!==version)return;$('ai-status').textContent=error.name==='TimeoutError'?'AI timed out. Knowledge notes remain available.':error.message;}
+  }catch(error){if(v!==version)return;$('ai-status').textContent=error.name==='TimeoutError'?'AI request timed out. Please try again later.':error.name==='TypeError'?'Could not reach the AI server from this browser or network. Try another connection or browser.':error.message;}
   finally{if(v===version){controller=null;$('generate-button').disabled=!available;}}
  });
  try{
@@ -49,7 +49,27 @@
   $('library-count').textContent=data.entries.filter(e=>e.status==='included').length+' searchable learning notes';$('search-button').disabled=false;
   $('search-status').textContent='Ask a question or choose an example. No AI request is made by searching.';
  }catch{ $('search-status').textContent='The knowledge library could not load. Reload this page to try again.';return; }
- try{const r=await fetch(endpoint+'/api/health',{cache:'no-store',signal:AbortSignal.timeout(7000)});if(r.ok){const h=await r.json();available=h.ai_enabled===true&&h.knowledge_version===data.version;}}catch{/* Local search is independent of the backend. */}
- $('ai-status').textContent=available?'AI is available within the shared request allowance.':'AI is not enabled for this library yet. You can read all matched notes and sources.';
+ // A failed health check is not proof that public AI is disabled.
+ // The actual POST request enforces the public mode and shared Redis quotas.
+ try{
+  const r=await fetch(endpoint+'/api/health',{cache:'no-store',signal:AbortSignal.timeout(12000)});
+  if(!r.ok){
+   availabilityMessage='AI availability check returned HTTP '+r.status+'. You may still try generating an explanation.';
+  }else{
+   const h=await r.json();
+   if(h.knowledge_version!==data.version){
+    availabilityMessage='Knowledge library version mismatch. Refresh this page before generating an explanation.';
+    available=false;
+   }else if(h.ai_enabled===true){
+    availabilityMessage='AI is available within the shared request allowance.';
+   }else{
+    availabilityMessage='AI is currently disabled by the server. You can still read all notes and sources.';
+    available=false;
+   }
+  }
+ }catch(error){
+  availabilityMessage=error.name==='TimeoutError'?'AI availability check timed out. You may still try generating an explanation.':'Could not check AI availability from this browser or network. You may still try generating an explanation.';
+ }
+ $('ai-status').textContent=availabilityMessage;
  $('generate-button').disabled=!available||!hits.length;
 })();
